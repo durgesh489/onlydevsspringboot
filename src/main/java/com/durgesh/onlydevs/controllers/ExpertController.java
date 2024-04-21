@@ -25,7 +25,7 @@ public class ExpertController {
         return experts;
     }
     @PostMapping("/addExpert")
-    public String signup(@RequestBody Expert expert) {
+    public String addExpert(@RequestBody Expert expert) {
         Expert result= expertRepository.save(expert);
         return "expert added";
 
