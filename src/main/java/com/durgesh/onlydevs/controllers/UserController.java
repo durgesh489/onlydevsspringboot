@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.CrossOrigin;
-@RestController("we-only-devs.vercel.app")
-@CrossOrigin(origins = "http://localhost:3000/")
+@RestController
+@CrossOrigin(origins = "http://viaduct.proxy.rlwy.net:31825/")
 public class UserController {
 
     @Autowired
