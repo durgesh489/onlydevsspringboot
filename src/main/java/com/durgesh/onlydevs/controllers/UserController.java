@@ -20,13 +20,13 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("signup")
+    @PostMapping("/signup")
     public String signup(@RequestBody User user) {
        User result= userRepository.save(user);
        return "user added";
 
     }
-    @PostMapping("login")
+    @PostMapping("/login")
     public String login(@RequestBody LoginUser loginUser) {
        User result= userRepository.getUserByEmail(loginUser.getEmail());
        if(result!=null) {
