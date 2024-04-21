@@ -7,6 +7,8 @@ import com.durgesh.onlydevs.repositories.UserRepository;
 import jakarta.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,5 +23,11 @@ public class ExpertController {
     public List<Expert> getAllExperts(){
         List<Expert>experts=(List<Expert>) expertRepository.findAll();
         return experts;
+    }
+    @PostMapping("/addExpert")
+    public String signup(@RequestBody Expert expert) {
+        Expert result= expertRepository.save(expert);
+        return "expert added";
+
     }
 }
