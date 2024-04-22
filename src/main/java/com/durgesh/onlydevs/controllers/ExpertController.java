@@ -6,6 +6,7 @@ import com.durgesh.onlydevs.repositories.ExpertRepository;
 import com.durgesh.onlydevs.repositories.UserRepository;
 import jakarta.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
