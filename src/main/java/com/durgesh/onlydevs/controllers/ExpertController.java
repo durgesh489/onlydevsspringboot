@@ -24,6 +24,7 @@ public class ExpertController {
         return experts;
     }
     @PostMapping("/addExpert")
+    @CrossOrigin(origins = "http://localhost:3000")
     public String addExpert(@RequestBody Expert expert) {
         Expert result= expertRepository.save(expert);
         return "expert added";
