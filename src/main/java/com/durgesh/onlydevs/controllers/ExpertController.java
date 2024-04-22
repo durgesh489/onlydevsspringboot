@@ -6,14 +6,12 @@ import com.durgesh.onlydevs.repositories.ExpertRepository;
 import com.durgesh.onlydevs.repositories.UserRepository;
 import jakarta.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://onlydevsspringboot-production.up.railway.app/")
 public class ExpertController {
 
     @Autowired
