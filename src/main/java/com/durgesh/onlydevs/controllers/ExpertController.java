@@ -28,4 +28,9 @@ public class ExpertController {
         return "expert added";
 
     }
+    // Method to handle preflight requests
+    @RequestMapping(value = "/addExpert", method = RequestMethod.OPTIONS)
+    public ResponseEntity handle() {
+        return ResponseEntity.ok().build();
+    }
 }
