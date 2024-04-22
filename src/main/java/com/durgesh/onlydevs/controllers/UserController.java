@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
-@CrossOrigin(origins = "http://onlydevsspringboot-production.up.railway.app/")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     @Autowired
