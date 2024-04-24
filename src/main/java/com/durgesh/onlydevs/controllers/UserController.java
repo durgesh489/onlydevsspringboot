@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.CrossOrigin;
+
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @Validated
@@ -26,7 +29,7 @@ public class UserController {
     UserRepository userRepository;
 
     @PostMapping("/signup")
-    public ResponseEntity<ApiResponse> signup(@RequestBody User user) {
+    public ResponseEntity<ApiResponse> signup(@Valid @RequestBody User user) {
        try {
            User result = userRepository.save(user);
            ApiResponse apiResponse=new ApiResponse("User Saved", "ok",user);
