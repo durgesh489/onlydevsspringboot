@@ -5,6 +5,8 @@ import lombok.NonNull;
 import org.aspectj.bridge.IMessage;
 import org.hibernate.annotations.NotFound;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,15 +19,23 @@ public class User {
 
     @Column(name = "username")
     @NotNull(message = "username cannot be null")
+    @NotBlank(message ="username cannot be null" )
+    @NotEmpty(message = "username cannot be null")
     String username;
     @Column(name = "password")
     @NotNull(message = "password cannot be null")
+    @NotBlank(message ="password cannot be null" )
+    @NotEmpty(message = "password cannot be null")
     String password;
     @Column(name = "email")
     @NotNull(message = "email cannot be null")
+    @NotBlank(message ="email cannot be null" )
+    @NotEmpty(message = "email cannot be null")
     String email;
     @Column(name = "type")
     @NotNull(message = "type cannot be null")
+    @NotBlank(message ="type cannot be null" )
+    @NotEmpty(message = "type cannot be null")
     String type;
 
     public User(){
