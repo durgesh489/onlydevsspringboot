@@ -1,9 +1,12 @@
 package com.durgesh.onlydevs.controllers;
 
+import com.durgesh.onlydevs.entities.ApiResponse;
 import com.durgesh.onlydevs.entities.LoginUser;
 import com.durgesh.onlydevs.entities.User;
 import com.durgesh.onlydevs.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,28 +24,23 @@ public class UserController {
     UserRepository userRepository;
 
     @PostMapping("/signup")
-    public String signup(@RequestBody User user) {
-       User result= userRepository.save(user);
-       return "user added";
-
-    }
-    @PostMapping("/login")
-    public String login(@RequestBody LoginUser loginUser) {
-       User result= userRepository.getUserByEmail(loginUser.getEmail());
-       if(result!=null) {
-           if(result.getPassword().equals(loginUser.getPassword())) {
-               return "Login Successsfull";
-           }
-           else{
-               return "Wrong email or password";
-           }
+    public ResponseEntity<ApiResponse> signup(@RequestBody User user) {
+       try {
+           User result = userRepository.save(user);
+           ApiResponse apiResponse=new ApiResponse("User Saved", "ok",user);
+           return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.OK);
        }
-       else {
-           return "User Not Found Please Sign Up";
+       catch (Exception exception){
+           ApiResponse apiResponse=new ApiResponse(exception.getMessage(),"not ok",null);
+           return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.INTERNAL_SERVER_ERROR);
        }
 
 
+
     }
+
+
+
     @GetMapping("/users")
     public List<User> getAllUsers(){
         List<User>users=(List<User>) userRepository.findAll();
