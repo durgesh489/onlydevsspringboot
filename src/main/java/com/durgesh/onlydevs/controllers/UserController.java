@@ -3,7 +3,9 @@ package com.durgesh.onlydevs.controllers;
 import com.durgesh.onlydevs.entities.ApiResponse;
 import com.durgesh.onlydevs.entities.LoginUser;
 import com.durgesh.onlydevs.entities.User;
+import com.durgesh.onlydevs.entities.UserDTO;
 import com.durgesh.onlydevs.repositories.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +30,14 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+
+    ObjectMapper objectMapper=new ObjectMapper();
     @PostMapping("/signup")
-    public ResponseEntity<ApiResponse> signup(@Valid @RequestBody User user) {
+    public ResponseEntity<ApiResponse> signup(@Valid @RequestBody UserDTO userDTO) {
        try {
-           User result = userRepository.save(user);
-           ApiResponse apiResponse=new ApiResponse("User Saved", "ok",user);
+           User result =objectMapper.convertValue(userDTO,User.class);
+           User resultUser = userRepository.save(result);
+           ApiResponse apiResponse=new ApiResponse("User Saved", "ok",resultUser);
            return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.OK);
        }
        catch (Exception exception){
