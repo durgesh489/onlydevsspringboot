@@ -35,9 +35,9 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse> signup(@Valid @RequestBody UserDTO userDTO) {
        try {
-           User result =objectMapper.convertValue(userDTO,User.class);
-           User resultUser = userRepository.save(result);
-           ApiResponse apiResponse=new ApiResponse("User Saved", "ok",resultUser);
+           User user =objectMapper.convertValue(userDTO,User.class);
+           User result = userRepository.save(user);
+           ApiResponse apiResponse=new ApiResponse("User Saved", "ok",result);
            return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.OK);
        }
        catch (Exception exception){
