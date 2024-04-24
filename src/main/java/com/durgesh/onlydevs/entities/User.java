@@ -1,8 +1,11 @@
 package com.durgesh.onlydevs.entities;
 
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
+import lombok.NonNull;
+import org.aspectj.bridge.IMessage;
 import org.hibernate.annotations.NotFound;
+
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -13,12 +16,16 @@ public class User {
     int id;
 
     @Column(name = "username")
+    @NotNull(message = "username cannot be null")
     String username;
     @Column(name = "password")
+    @NotNull(message = "password cannot be null")
     String password;
     @Column(name = "email")
+    @NotNull(message = "email cannot be null")
     String email;
     @Column(name = "type")
+    @NotNull(message = "type cannot be null")
     String type;
 
     public User(){
