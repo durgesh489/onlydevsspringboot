@@ -1,52 +1,81 @@
 package com.durgesh.onlydevs.entities;
 
-import jakarta.persistence.*;
-import lombok.*;
-import org.aspectj.bridge.IMessage;
-import org.hibernate.annotations.NotFound;
+import java.util.Collection;
+import java.util.List;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-@Getter
-@Setter
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "user")
+public class User implements UserDetails {
 
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
-    @Column(name = "username")
-    @NotNull(message = "username cannot be null")
+	private String name;
 
-    String username;
-    @Column(name = "password")
-    @NotNull(message = "password cannot be null")
+	private String password;
 
-    String password;
-    @Column(name = "email")
-    @NotNull(message = "email cannot be null")
+	private String email;
 
-    String email;
-    @Column(name = "type")
-    @NotNull(message = "type cannot be null")
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
-    String type;
+	@OneToMany(mappedBy = "user")
+	private List<Token> tokens;
 
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return role.getAuthorities();
+	}
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", type='" + type + '\'' +
-                '}';
-    }
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
 }
