@@ -1,10 +1,7 @@
-package com.durgesh.onlydevs.controllers;
+package com.durgesh.onlydevs.controllers.experts;
 
-import com.durgesh.onlydevs.entities.Expert;
-import com.durgesh.onlydevs.entities.User;
+import com.durgesh.onlydevs.entities.experts.Expert;
 import com.durgesh.onlydevs.repositories.ExpertRepository;
-import com.durgesh.onlydevs.repositories.UserRepository;
-import jakarta.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

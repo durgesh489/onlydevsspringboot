@@ -1,4 +1,4 @@
-package com.durgesh.onlydevs.entities;
+package com.durgesh.onlydevs.entities.experts;
 
 
 import jakarta.persistence.*;
